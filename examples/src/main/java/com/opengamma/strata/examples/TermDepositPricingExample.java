@@ -39,14 +39,15 @@ import com.opengamma.strata.report.trade.TradeReport;
 import com.opengamma.strata.report.trade.TradeReportTemplate;
 
 /**
- * Example to illustrate using the engine to price a Term Deposit.
+ * Example to illustrate说明 using the engine to price定价 a Term Deposit定期存款.
  * <p>
  * This makes use of the example engine and the example market data environment.
+ * 基于引擎和市场数据的环境
  */
 public class TermDepositPricingExample {
 
   /**
-   * Runs the example, pricing the instruments, producing the output as an ASCII table.
+   * Runs the example, pricing the instruments对工具进行定价, producing the output as an ASCII table.
    * 
    * @param args  ignored
    */
@@ -64,6 +65,7 @@ public class TermDepositPricingExample {
     List<Trade> trades = ImmutableList.of(createTrade1(), createTrade2());
 
     // the columns, specifying the measures to be calculated
+    // 指定需要计算的指标，todo：怎么计算的？
     List<Column> columns = ImmutableList.of(
         Column.of(Measures.PRESENT_VALUE),
         Column.of(Measures.PV01_CALIBRATED_SUM),
@@ -72,15 +74,17 @@ public class TermDepositPricingExample {
         Column.of(Measures.PV01_CALIBRATED_BUCKETED));
 
     // use the built-in example market data
+    // 估值日期
     LocalDate valuationDate = LocalDate.of(2014, 1, 22);
     ExampleMarketDataBuilder marketDataBuilder = ExampleMarketData.builder();
     MarketData marketData = marketDataBuilder.buildSnapshot(valuationDate);
 
     // the complete set of rules for calculating measures
+    // 计算指标的整套规则
     CalculationFunctions functions = StandardComponents.calculationFunctions();
     CalculationRules rules = CalculationRules.of(functions, marketDataBuilder.ratesLookup(valuationDate));
 
-    // the reference data, such as holidays and securities
+    // the reference data, such as holidays and securities 节假日和证券信息
     ReferenceData refData = ReferenceData.standard();
 
     // calculate the results

@@ -20,7 +20,7 @@ import com.opengamma.strata.data.scenario.ScenarioArray;
 public final class Measures {
 
   /**
-   * Measure representing the present value of the calculation target.
+   * Measure representing the present value现值 of the calculation target.
    * <p>
    * The result is a single currency monetary amount in the reporting currency.
    */
@@ -76,11 +76,11 @@ public final class Measures {
 
   //-------------------------------------------------------------------------
   /**
-   * Measure representing the par rate of the calculation target.
+   * Measure representing the par rate票面利率 of the calculation target.
    */
   public static final Measure PAR_RATE = Measure.of(StandardMeasures.PAR_RATE.getName());
   /**
-   * Measure representing the par spread of the calculation target.
+   * Measure representing the par spread票面息差 of the calculation target.
    */
   public static final Measure PAR_SPREAD = Measure.of(StandardMeasures.PAR_SPREAD.getName());
 
