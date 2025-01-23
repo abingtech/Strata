@@ -101,6 +101,7 @@ final class DefaultCalculationTaskRunner implements CalculationTaskRunner {
 
     // perform the calculations
     ScenarioMarketData md = ScenarioMarketData.of(1, marketData);
+    // 计算多场景
     Results results = calculateMultiScenario(tasks, md, refData);
 
     // unwrap the results
@@ -160,8 +161,9 @@ final class DefaultCalculationTaskRunner implements CalculationTaskRunner {
       CalculationTasks tasks,
       ScenarioMarketData marketData,
       ReferenceData refData) {
-
+    // 定义收集结果的监听器
     ResultsListener listener = new ResultsListener();
+    // 异步计算
     calculateMultiScenarioAsync(tasks, marketData, refData, listener);
     return listener.result();
   }
@@ -177,6 +179,8 @@ final class DefaultCalculationTaskRunner implements CalculationTaskRunner {
     // the listener is invoked via this wrapper
     // the wrapper ensures thread-safety for the listener
     // it also calls the listener with single CalculationResult cells, not CalculationResults
+    // todo：为啥需要包装一层？如何确保的线程安全
+    // 消费型接口
     Consumer<CalculationResults> consumer =
         new ListenerWrapper(listener, taskList.size(), tasks.getTargets(), tasks.getColumns());
 
@@ -193,7 +197,9 @@ final class DefaultCalculationTaskRunner implements CalculationTaskRunner {
 
     // the task is executed, with the result passed to the consumer
     // the consumer wraps the listener to ensure thread-safety
+    // todo：供给型接口，调用get会返回CalculationResults
     Supplier<CalculationResults> taskExecutor = () -> task.execute(marketData, refData);
+    // todo：多线程执行的结果存储在CalculationResults，并且调用消费型接口进行消费
     CompletableFuture.supplyAsync(taskExecutor, executor).thenAccept(consumer);
   }
 

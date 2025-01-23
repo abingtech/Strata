@@ -77,7 +77,7 @@ class DefaultCalculationRunner implements CalculationRunner {
       List<Column> columns,
       MarketData marketData,
       ReferenceData refData) {
-
+    // todo: 创建计算任务
     CalculationTasks tasks = CalculationTasks.of(calculationRules, targets, columns, refData);
     return taskRunner.calculate(tasks, marketData, refData);
   }
