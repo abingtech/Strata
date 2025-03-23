@@ -214,6 +214,10 @@ public final class HolidayCalendarIds {
    * This constant references the calendar for Johannesburg bank holidays.
    */
   public static final HolidayCalendarId ZAJO = HolidayCalendarId.of("ZAJO");
+  /**
+   * CNBD:China Banking Days, 中国的银行假日
+   */
+  public static final HolidayCalendarId CNBD = HolidayCalendarId.of("CNBD");
 
   //-------------------------------------------------------------------------
   /**

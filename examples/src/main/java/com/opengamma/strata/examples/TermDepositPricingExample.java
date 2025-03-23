@@ -4,7 +4,7 @@
  * Please see distribution for license.
  */
 package com.opengamma.strata.examples;
-
+// 静态类
 import static com.opengamma.strata.basics.date.BusinessDayConventions.FOLLOWING;
 
 import java.time.LocalDate;
@@ -67,8 +67,8 @@ public class TermDepositPricingExample {
     // the columns, specifying the measures to be calculated
     // 指定需要计算的指标
     List<Column> columns = ImmutableList.of(
-        Column.of(Measures.PRESENT_VALUE),
-        Column.of(Measures.PV01_CALIBRATED_SUM),
+        Column.of(Measures.PRESENT_VALUE),// 现值
+        Column.of(Measures.PV01_CALIBRATED_SUM),// PV01
         Column.of(Measures.PAR_RATE),
         Column.of(Measures.PAR_SPREAD),
         Column.of(Measures.PV01_CALIBRATED_BUCKETED));
@@ -116,9 +116,9 @@ public class TermDepositPricingExample {
     return TermDepositTrade.builder()
         .product(td)
         .info(TradeInfo.builder()
-            .id(StandardId.of("example", "1"))
+            .id(StandardId.of("example", "11"))
             .addAttribute(AttributeType.DESCRIPTION, "Deposit 10M at 3%")
-            .counterparty(StandardId.of("example", "A"))
+            .counterparty(StandardId.of("example", "AA"))
             .settlementDate(LocalDate.of(2014, 12, 16))
             .build())
         .build();
@@ -140,9 +140,9 @@ public class TermDepositPricingExample {
     return TermDepositTrade.builder()
         .product(td)
         .info(TradeInfo.builder()
-            .id(StandardId.of("example", "2"))
+            .id(StandardId.of("example", "22"))
             .addAttribute(AttributeType.DESCRIPTION, "Deposit 5M at 3.8%")
-            .counterparty(StandardId.of("example", "A"))
+            .counterparty(StandardId.of("example", "AA"))
             .settlementDate(LocalDate.of(2015, 12, 16))
             .build())
         .build();

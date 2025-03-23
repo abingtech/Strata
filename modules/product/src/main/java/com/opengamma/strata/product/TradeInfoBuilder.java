@@ -97,6 +97,7 @@ public final class TradeInfoBuilder implements PortfolioItemInfoBuilder<TradeInf
 
   /**
    * Sets the counterparty identifier, optional.
+   * 交易对手
    * <p>
    * An identifier used to specify the counterparty of the trade.
    * 
