@@ -65,7 +65,7 @@ public class TermDepositPricingExample {
     List<Trade> trades = ImmutableList.of(createTrade1(), createTrade2());
 
     // the columns, specifying the measures to be calculated
-    // 指定需要计算的指标，todo：怎么计算的？??
+    // 指定需要计算的指标
     List<Column> columns = ImmutableList.of(
         Column.of(Measures.PRESENT_VALUE),
         Column.of(Measures.PV01_CALIBRATED_SUM),
