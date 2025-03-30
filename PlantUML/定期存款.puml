@@ -1,0 +1,43 @@
+@startuml
+start
+:创建TermDeposit交易;
+
+:创建计算规则CalculationRules;
+note right
+  设置报告货币
+  设置计算参数
+  设置计算函数
+end note
+
+:创建计算列列表;
+
+:创建计算任务CalculationTasks;
+note right
+  解析目标
+  创建单元格
+  创建任务
+end note
+
+:创建市场数据MarketData;
+note right
+  创建利率曲线
+  创建汇率曲线
+  创建市场数据
+end note
+
+:创建参考数据ReferenceData;
+
+:创建计算运行器CalculationRunner;
+
+:执行计算;
+note right
+  获取市场数据要求
+  执行计算任务
+  处理计算结果
+end note
+
+:处理计算结果;
+
+:输出结果;
+stop
+@enduml

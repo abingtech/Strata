@@ -62,10 +62,11 @@ public class TermDepositPricingExample {
   // obtains the data and calculates the grid of results
   private static void calculate(CalculationRunner runner) {
     // the trades that will have measures calculated
+    // 创建两笔交易，相当于两个计算对象
     List<Trade> trades = ImmutableList.of(createTrade1(), createTrade2());
 
     // the columns, specifying the measures to be calculated
-    // 指定需要计算的指标
+    // 计算列列表，包含指标，计算参数，报告币种
     List<Column> columns = ImmutableList.of(
         Column.of(Measures.PRESENT_VALUE),// 现值
         Column.of(Measures.PV01_CALIBRATED_SUM),// PV01
@@ -74,14 +75,16 @@ public class TermDepositPricingExample {
         Column.of(Measures.PV01_CALIBRATED_BUCKETED));
 
     // use the built-in example market data
-    // 估值日期
+    // 指定估值日期
     LocalDate valuationDate = LocalDate.of(2014, 1, 22);
     ExampleMarketDataBuilder marketDataBuilder = ExampleMarketData.builder();
+    // 构造一份市场数据快照
     MarketData marketData = marketDataBuilder.buildSnapshot(valuationDate);
 
     // the complete set of rules for calculating measures
-    // 计算指标的整套规则
+    // 计算函数集合
     CalculationFunctions functions = StandardComponents.calculationFunctions();
+    // 计算函数集合与计算参数组合成计算规则
     CalculationRules rules = CalculationRules.of(functions, marketDataBuilder.ratesLookup(valuationDate));
 
     // the reference data, such as holidays and securities 节假日和证券信息
@@ -102,6 +105,7 @@ public class TermDepositPricingExample {
   //-----------------------------------------------------------------------  
   // create a TermDeposit trade
   private static Trade createTrade1() {
+    // 一张定期存款的存单
     TermDeposit td = TermDeposit.builder()
         .buySell(BuySell.BUY)
         .startDate(LocalDate.of(2014, 9, 12))
@@ -115,6 +119,7 @@ public class TermDepositPricingExample {
 
     return TermDepositTrade.builder()
         .product(td)
+            // 对一笔交易添加额外的信息
         .info(TradeInfo.builder()
             .id(StandardId.of("example", "11"))
             .addAttribute(AttributeType.DESCRIPTION, "Deposit 10M at 3%")

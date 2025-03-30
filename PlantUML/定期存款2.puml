@@ -1,0 +1,113 @@
+@startuml
+start
+:创建TermDeposit交易;
+note right
+  设置本金: 1,000,000 USD
+  设置利率: 0.05
+  设置开始日期: 2014-01-22
+  设置结束日期: 2014-07-22
+  设置计息规则: 30/360
+end note
+
+:创建计算规则CalculationRules;
+note right
+  设置报告货币: USD
+  设置计算参数:
+  - 定价规则
+  - 报告货币规则
+  设置计算函数:
+  - 定价函数
+  - 现值函数
+  - 收益率函数
+end note
+
+:创建计算列列表;
+note right
+  创建列:
+  - Present Value
+  - Market Quote
+  - Par Rate
+  - Accrued Interest
+  - Cash Flows
+end note
+
+:创建计算任务CalculationTasks;
+note right
+  解析目标:
+  - 验证交易参数
+  - 检查日期有效性
+  创建单元格:
+  - 每个目标一行
+  - 每个度量一列
+  创建任务:
+  - 按参数分组
+  - 优化计算效率
+end note
+
+:创建市场数据MarketData;
+note right
+  创建利率曲线:
+  - USD贴现曲线
+  - 构建零息曲线
+  创建汇率曲线:
+  - USD/EUR汇率
+  - 构建远期汇率
+  创建市场数据:
+  - 合并所有曲线
+  - 验证数据完整性
+end note
+
+:创建参考数据ReferenceData;
+note right
+  创建日历:
+  - 交易日历
+  - 节假日信息
+  创建其他参考数据:
+  - 货币信息
+  - 计息规则
+end note
+
+:创建计算运行器CalculationRunner;
+note right
+  配置运行器:
+  - 设置并行度
+  - 配置错误处理
+  准备执行环境:
+  - 初始化线程池
+  - 设置超时时间
+end note
+
+:执行计算;
+note right
+  获取市场数据要求:
+  - 收集所有依赖
+  - 验证数据可用性
+  执行计算任务:
+  - 并行处理任务
+  - 处理计算结果
+  处理计算结果:
+  - 验证结果有效性
+  - 转换报告货币
+end note
+
+:处理计算结果;
+note right
+  结果处理:
+  - 格式化数值
+  - 添加元数据
+  结果验证:
+  - 检查异常值
+  - 验证计算准确性
+end note
+
+:输出结果;
+note right
+  输出格式:
+  - 表格形式
+  - CSV格式
+  结果展示:
+  - 显示关键指标
+  - 提供详细数据
+end note
+stop
+@enduml
