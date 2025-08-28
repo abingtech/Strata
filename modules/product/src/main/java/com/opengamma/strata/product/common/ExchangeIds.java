@@ -111,7 +111,7 @@ public final class ExchangeIds {
   /** Tokyo Stock Exchange. */
   public static final ExchangeId XTKS = ExchangeId.of("XTKS");
 
-  /** Borsa Istanbul Exchange */
+  /** Borsa Istanbul Exchange - Futures and Options Segment. */
   public static final ExchangeId XFNO = ExchangeId.of("XFNO");
 
   /** Euronext Exchange - Paris MATIF */
@@ -170,6 +170,12 @@ public final class ExchangeIds {
 
   /** TAIWAN Futures Exchange. */
   public static final ExchangeId XTAF = ExchangeId.of("XTAF");
+
+  /** Thailand Futures Exchange. */
+  public static final ExchangeId TFEX = ExchangeId.of("TFEX");
+
+  /** Borsa Istanbul Exchange. */
+  public static final ExchangeId XIST = ExchangeId.of("XIST");
 
   //-------------------------------------------------------------------------
   /**
