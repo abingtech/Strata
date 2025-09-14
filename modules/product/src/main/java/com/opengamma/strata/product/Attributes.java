@@ -12,6 +12,7 @@ import com.opengamma.strata.collect.Messages;
 
 /**
  * Additional attributes that can be associated with a model object.
+ * 附加属性
  */
 public interface Attributes {
 

@@ -68,13 +68,13 @@ public class TermDepositPricingExample {
     // todo: 计算列，指定需要计算的指标
     List<Column> columns = ImmutableList.of(
         Column.of(Measures.PRESENT_VALUE),// todo: 现值，表示这笔存款现在值多少钱
-        Column.of(Measures.PV01_CALIBRATED_SUM),// todo: PV01:
+        Column.of(Measures.PV01_CALIBRATED_SUM),// todo: PV01
         Column.of(Measures.PAR_RATE),
         Column.of(Measures.PAR_SPREAD),
         Column.of(Measures.PV01_CALIBRATED_BUCKETED));
 
     // use the built-in example market data
-    // todo: 指定估值日期
+    // todo: 指定估值日期，交易发生日？1月22做的交易？
     LocalDate valuationDate = LocalDate.of(2014, 1, 22);
     // todo: 创建一个市场数据构建器
     ExampleMarketDataBuilder marketDataBuilder = ExampleMarketData.builder();
@@ -92,12 +92,13 @@ public class TermDepositPricingExample {
     ReferenceData refData = ReferenceData.standard();
 
     // calculate the results
+    // todo: 计算并返回收集的结果
     Results results = runner.calculate(rules, trades, columns, marketData, refData);
 
     // use the report runner to transform the engine results into a trade report
     ReportCalculationResults calculationResults =
         ReportCalculationResults.of(valuationDate, trades, columns, results, functions, refData);
-
+    // todo: 交易报告的模板
     TradeReportTemplate reportTemplate = ExampleData.loadTradeReportTemplate("term-deposit-report-template");
     TradeReport tradeReport = TradeReport.of(calculationResults, reportTemplate);
     tradeReport.writeAsciiTable(System.out);
@@ -106,15 +107,15 @@ public class TermDepositPricingExample {
   //-----------------------------------------------------------------------  
   // create a TermDeposit trade
   private static Trade createTrade1() {
-    // 一张定期存款的存单
+    // todo: 9月12到12月12，买入，
     TermDeposit td = TermDeposit.builder()
         .buySell(BuySell.BUY)
         .startDate(LocalDate.of(2014, 9, 12))
         .endDate(LocalDate.of(2014, 12, 12))
         .businessDayAdjustment(BusinessDayAdjustment.of(FOLLOWING, HolidayCalendarIds.GBLO))
         .currency(Currency.USD)
-        .notional(10_000_000)
-        .dayCount(DayCounts.THIRTY_360_ISDA)
+        .notional(10_000_000) // 1000w
+        .dayCount(DayCounts.THIRTY_360_ISDA) // 计息天数：一年按360天计算，一个月按30天，遇到31号需要特殊调整
         .rate(0.003)
         .build();
 
@@ -125,6 +126,7 @@ public class TermDepositPricingExample {
             .id(StandardId.of("example", "11"))
             .addAttribute(AttributeType.DESCRIPTION, "Deposit 10M at 3%")
             .counterparty(StandardId.of("example", "AA"))
+                // 交割日期
             .settlementDate(LocalDate.of(2014, 12, 16))
             .build())
         .build();

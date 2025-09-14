@@ -81,6 +81,7 @@ final class IborIndexCsvLookup
   private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH[:mm]", Locale.ENGLISH);
   /**
    * The cache by name.
+   * 随着类加载的时候执行，只会执行一次
    */
   private static final ImmutableMap<String, IborIndex> BY_NAME = loadFromCsv();
 

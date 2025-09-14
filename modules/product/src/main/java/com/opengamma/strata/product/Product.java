@@ -16,6 +16,7 @@ import com.opengamma.strata.basics.currency.Currency;
  * <p>
  * A product exists independently from a {@link Trade}. It represents the economics of the
  * financial instrument regardless of the trade date or counterparties.
+ * 产品独立于交易而存在，与交易日和交易对手无关
  * <p>
  * Implementations must be immutable and thread-safe beans.
  */
