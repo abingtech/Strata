@@ -4,7 +4,6 @@
  * Please see distribution for license.
  */
 package com.opengamma.strata.examples;
-// 静态类
 import static com.opengamma.strata.basics.date.BusinessDayConventions.FOLLOWING;
 
 import java.time.LocalDate;
@@ -62,32 +61,34 @@ public class TermDepositPricingExample {
   // obtains the data and calculates the grid of results
   private static void calculate(CalculationRunner runner) {
     // the trades that will have measures calculated
-    // 创建两笔交易，相当于两个计算对象
+    // todo: 创建两笔交易
     List<Trade> trades = ImmutableList.of(createTrade1(), createTrade2());
 
     // the columns, specifying the measures to be calculated
-    // 计算列列表，包含指标，计算参数，报告币种
+    // todo: 计算列，指定需要计算的指标
     List<Column> columns = ImmutableList.of(
-        Column.of(Measures.PRESENT_VALUE),// 现值
-        Column.of(Measures.PV01_CALIBRATED_SUM),// PV01
+        Column.of(Measures.PRESENT_VALUE),// todo: 现值，表示这笔存款现在值多少钱
+        Column.of(Measures.PV01_CALIBRATED_SUM),// todo: PV01:
         Column.of(Measures.PAR_RATE),
         Column.of(Measures.PAR_SPREAD),
         Column.of(Measures.PV01_CALIBRATED_BUCKETED));
 
     // use the built-in example market data
-    // 指定估值日期
+    // todo: 指定估值日期
     LocalDate valuationDate = LocalDate.of(2014, 1, 22);
+    // todo: 创建一个市场数据构建器
     ExampleMarketDataBuilder marketDataBuilder = ExampleMarketData.builder();
-    // 构造一份市场数据快照
+    // todo: 利用构建器构造一份估值日期对应的市场数据快照
     MarketData marketData = marketDataBuilder.buildSnapshot(valuationDate);
 
     // the complete set of rules for calculating measures
-    // 计算函数集合
+    // todo: 计算函数集合
     CalculationFunctions functions = StandardComponents.calculationFunctions();
-    // 计算函数集合与计算参数组合成计算规则
+    // todo: 计算函数与计算参数组合成计算规则, 这里的计算参数是市场利率
     CalculationRules rules = CalculationRules.of(functions, marketDataBuilder.ratesLookup(valuationDate));
 
-    // the reference data, such as holidays and securities 节假日和证券信息
+    // the reference data, such as holidays and securities
+    // todo: 标准的引用数据
     ReferenceData refData = ReferenceData.standard();
 
     // calculate the results
